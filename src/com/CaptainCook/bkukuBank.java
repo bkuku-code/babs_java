@@ -2,7 +2,7 @@ package com.CaptainCook;
 
 import java.util.*;
 
-public class BankAccount {
+public class bkukuBank {
     static Scanner input = new Scanner(System.in);
     String name;
     String accounttype;
@@ -11,12 +11,14 @@ public class BankAccount {
     int amt;
     int withdrawl;
      int transfer;
+    private String staffLogin;
+    private String customeLogin;
+    private Object DeleteCustomerProfile;
 
 
-
-    BankAccount(String name, int accNo, String actype, int bal , int withdrawl, int transfer) {
-        this.name = name;
-        this.accountNo = accNo;
+    bkukuBank(String staffLogin,String customeLogin, int accNo, String actype, int bal , int withdrawl, int transfer) {
+        this.staffLogin = staffLogin;
+        this.customeLogin = customeLogin;
         this.accounttype = actype;
         this.balance = bal;
         this.withdrawl = withdrawl;
@@ -24,7 +26,7 @@ public class BankAccount {
 
     }
 
-    public BankAccount(String nn, int num, String type, int bal) {
+    public bkukuBank(String nn, int num, String type, int bal) {
 
     }
     int Withdrawl() {
@@ -45,22 +47,13 @@ public class BankAccount {
 
     }
 
-    int deposit() {
-        System.out.print("Enter amount to deposit:");
-        amt = input.nextInt();
-        if (amt < 0) {
-            System.out.println("Invalid Amount");
-            return 1;
-        }
-        balance = balance + amt;
-        return 0;
-    }
+    
 
     int transfer() {
         System.out.println("Your Balance=" + balance);
         System.out.print("Enter amount to transfer:");
         amt = input.nextInt();
-        if (transfer < amt) {
+        if (transfer > amt) {
             System.out.println("Not sufficient balance.");
             return 1;
         }
@@ -74,8 +67,8 @@ public class BankAccount {
 
 
     void display() {
-        System.out.println("Name:" + name);
-        System.out.println("Account No:" + accountNo);
+        System.out.println("Staff login:" + staffLogin);
+        System.out.println("Customer login:" + customeLogin);
         System.out.println("Balance:" + balance);
 
     }
@@ -85,42 +78,47 @@ public class BankAccount {
     }
 
     public static void main(String args[]) {
-        System.out.println("Enter your Name: ");
+        System.out.println("Staff Login: ");
         String nn = input.nextLine();
-        System.out.println("Enter Account Number: ");
+        System.out.println("Enter OTTP code : ");
         int num = input.nextInt();
-        System.out.println("Enter Account Type: ");
+        System.out.println("Customer Login: ");
         String type = input.next();
         System.out.println("Enter Initial Balance: ");
         int bal = input.nextInt();
-        BankAccount b1 = new BankAccount(nn, num, type, bal);
+        System.out.println("Delete customer profile :");
+        String customerProfile = input.nextLine();
+        bkukuBank b1 = new bkukuBank(nn, num, type, bal);
+
         int menu;
         System.out.println("Menu");
-        System.out.println("1. Deposit Amount");
-        System.out.println("2. Transfer Amount");
-        System.out.println("3. Withdrawl Amount");
-        System.out.println("4. Display Information");
+        System.out.println("1. Transfer Amount");
+        System.out.println("2. Withdrawl Amount");
+        System.out.println("3. Display Information");
+        System.out.println("4, Delete customer profile");
         System.out.println("5. Exit");
         boolean quit = false;
         do {
             System.out.print("Please enter your choice: ");
             menu = input.nextInt();
             switch (menu) {
+               
                 case 1:
-                    b1.deposit();
-                    break;
-
-                case 2:
                     b1.transfer();
                     break;
 
-                case 3:
+                case 2:
                     b1.withdrawl();
                     break;
 
-                case 4:
+                case 3:
                     b1.display();
                     break;
+                    
+                case 4:
+                    b1.DeleteCustomerProfile();
+                    break;
+
 
                 case 5:
                     quit = true;
@@ -129,6 +127,9 @@ public class BankAccount {
 
             }
         } while (!quit);
+    }
+
+    private void DeleteCustomerProfile() {
     }
 
     private void withdrawl() {
