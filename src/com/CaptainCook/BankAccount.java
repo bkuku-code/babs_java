@@ -2,13 +2,13 @@ package com.CaptainCook;
 
 import java.util.*;
 
-public class bkukuBank {
+public class BankAccount {
     static Scanner input = new Scanner(System.in);
+    private  int topUp;
     String name;
-    String accounttype;
-    int accountNo;
+    int deposite;
     int balance;
-    int amt;
+    int amount;
     int withdrawl;
      int transfer;
     private String staffLogin;
@@ -16,79 +16,97 @@ public class bkukuBank {
     private Object DeleteCustomerProfile;
 
 
-    bkukuBank(String staffLogin,String customeLogin, int accNo, String actype, int bal , int withdrawl, int transfer) {
+    BankAccount(String staffLogin,String customeLogin, int deposite , int topUp, int bal , int withdrawl, int transfer) {
         this.staffLogin = staffLogin;
         this.customeLogin = customeLogin;
-        this.accounttype = actype;
-        this.balance = bal;
+        this.deposite = deposite;
+        this.balance = balance;
         this.withdrawl = withdrawl;
         this.transfer = transfer;
+        this.topUp = topUp;
 
     }
 
-    public bkukuBank(String nn, int num, String type, int bal) {
+    public BankAccount(String staffLogin,String customeLogin, int number, String type, int balance) {
 
     }
+
+    public BankAccount(String name, int number, String type, int balance) {
+
+    }
+
     int Withdrawl() {
         System.out.println("Your Balance=" + balance);
         System.out.print("Enter amount to Withdrawl:");
-        amt = input.nextInt();
-        if (balance < amt) {
+        amount = input.nextInt();
+        if (balance < amount) {
             System.out.println("Not sufficient balance.");
             return 1;
         }
-        if (amt < 0) {
+        if (amount < 0) {
             System.out.println("Invalid Amount");
             return 1;
         }
-        balance = balance - amt;
+        balance = balance - amount;
         return 0;
 
 
     }
-
-    
 
     int transfer() {
         System.out.println("Your Balance=" + balance);
         System.out.print("Enter amount to transfer:");
-        amt = input.nextInt();
-        if (transfer > amt) {
+        amount = input.nextInt();
+        if (transfer > amount) {
             System.out.println("Not sufficient balance.");
             return 1;
         }
-        if (amt < 0) {
+        if (amount < 0) {
             System.out.println("Invalid Amount");
             return 1;
         }
-        balance = balance - amt;
+        balance = balance - amount;
         return 0;
     }
 
+    int Deposite(){
+        System.out.println("Your Balance = + balance");
+        System.out.println("Enter amount to Deposite:");
+        amount = input.nextInt();
+        if (amount < 0) {
+            System.out.println("Invalid Amount");
+            return 1;
+        }
+        balance = balance + amount;
+        return 0;
+    }
 
-    void display() {
+    
+
+
+   public void display() {
         System.out.println("Staff login:" + staffLogin);
         System.out.println("Customer login:" + customeLogin);
         System.out.println("Balance:" + balance);
 
     }
 
-    void dbal() {
+    public void dbal() {
         System.out.println("Balance:" + balance);
     }
 
     public static void main(String args[]) {
         System.out.println("Staff Login: ");
-        String nn = input.nextLine();
+        String name = input.nextLine();
         System.out.println("Enter OTTP code : ");
-        int num = input.nextInt();
+        int number = input.nextInt();
         System.out.println("Customer Login: ");
         String type = input.next();
         System.out.println("Enter Initial Balance: ");
-        int bal = input.nextInt();
+        int balance = input.nextInt();
         System.out.println("Delete customer profile :");
         String customerProfile = input.nextLine();
-        bkukuBank b1 = new bkukuBank(nn, num, type, bal);
+        BankAccount kata = new BankAccount(name, number, type, balance);
 
         int menu;
         System.out.println("Menu");
@@ -96,7 +114,9 @@ public class bkukuBank {
         System.out.println("2. Withdrawl Amount");
         System.out.println("3. Display Information");
         System.out.println("4, Delete customer profile");
-        System.out.println("5. Exit");
+        System.out.println("5, Deposit");
+        System.out.println("6, TopUp");
+        System.out.println("7. Exit");
         boolean quit = false;
         do {
             System.out.print("Please enter your choice: ");
@@ -104,29 +124,43 @@ public class bkukuBank {
             switch (menu) {
                
                 case 1:
-                    b1.transfer();
+                    kata.transfer();
                     break;
 
                 case 2:
-                    b1.withdrawl();
+                    kata.withdrawl();
                     break;
 
                 case 3:
-                    b1.display();
+                    kata.display();
                     break;
                     
                 case 4:
-                    b1.DeleteCustomerProfile();
+                    kata.DeleteCustomerProfile();
+                    break;
+                    
+                case 5:
+                    kata.deposite();
+                    break;
+                    
+                case 6: 
+                    kata.topUp();
                     break;
 
 
-                case 5:
+                case 67:
                     quit = true;
                     break;
                 default:
 
             }
         } while (!quit);
+    }
+
+    private void topUp() {
+    }
+
+    private void deposite() {
     }
 
     private void DeleteCustomerProfile() {
