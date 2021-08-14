@@ -27,6 +27,7 @@ class InvoiceTest {
     void displayItemQuantityPurchase() {
         assertEquals(2 , realInvoice.getItemQuantityPurchase());
     }
+    
 
     @Test
     void displayItemPrice() {
